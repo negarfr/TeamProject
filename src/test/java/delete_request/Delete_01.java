@@ -26,17 +26,20 @@ public class Delete_01 extends AutomationBaseUrl {
      */
 
     @Test
-    public void post06() {
+    public void delete01() {
         //Set the url
         spec.pathParam("first", "verifyLogin");
 
-        Response response = given().spec(spec).urlEncodingEnabled(true).
-                param("email", "na.pez+1@gmail").param("password", "zen").
-                header("Accept", ContentType.JSON.getAcceptHeader()).post("/{first}");
+        //Send the request and get the response
+        Response response = given().spec(spec).
+                urlEncodingEnabled(true).
+                header("Accept", ContentType.JSON.getAcceptHeader()).
+                delete("/{first}");
         response.jsonPath().prettyPrint();
 
 
         //Do Assertion
+
 
 //         ResponsePojo actualData = new ObjectMapper().readValue(response.asString(),ResponsePojo.class);
 //         System.out.println("actualData = " + actualData);
@@ -46,10 +49,10 @@ public class Delete_01 extends AutomationBaseUrl {
 
 //
         assertEquals(200, response.statusCode());
-        assertEquals("404", actualData.getResponseCode().toString());
-        assertEquals("User not found!", actualData.getMessage());
-    }
+        assertEquals("405", actualData.getResponseCode().toString());
+        assertEquals("This request method is not supported.", actualData.getMessage());
 
+    }
 
 
 }
